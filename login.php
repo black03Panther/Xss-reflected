@@ -20,7 +20,7 @@ session_start();
             $_SESSION["email"] = $email;
             $_SESSION["username"] = $row['username'];
             $_SESSION["fullname"] = $row['fullname'];
-            header("location: welcome.php"); 
+            header("location: index.php"); 
             exit();
        } else {
            $error = "Anmeldung fehlgeschlagen. Bitte überprüfe deine Anmeldeinformationen.";
@@ -83,7 +83,7 @@ session_start();
               <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">Active</a>
             </li>
             <li class="mr-4">
-              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/createpost.php">Post erstellen</a>
+              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Post erstellen</a>
             </li>
           </ul>
           <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) { ?>

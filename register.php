@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["fullname"] = $fullname;
 
 
-              header("location: welcome.php");
+              header("location: index.php");
               exit();
           }
       } 
@@ -60,11 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <?php
-    include ('connect.php');
-    $sql = "SELECT * FROM user";
-    $result = mysqli_query($db, $sql);
-    ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8" />
@@ -117,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">Active</a>
             </li>
             <li class="mr-4">
-              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/createpost.php">Post erstellen</a>
+              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Post erstellen</a>
             </li>
           </ul>
           <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) { ?>

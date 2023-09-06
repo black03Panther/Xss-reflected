@@ -11,18 +11,35 @@ function getLoggedInUsername() {
 }
 
 $loggedInUsername = getLoggedInUsername();
+
+
+  $names = ["Leslie Alexander", "John Doe", "Jane Smith", "Michael Johnson"];
+  $emails = ["leslie.alexander@example.com", "john.doe@example.com", "jane.smith@example.com", "michael.johnson@example.com"];
+
+  $randomIndex = array_rand($names);
+  $randomName = $names[$randomIndex];
+  $randomEmail = $emails[$randomIndex];
+  $randomJob = $Jobs[$randomIndex];
+  $randomTime = $Times[$randomIndex];
+
+  $Jobs = ["Front-end Developer"];
+  $Times = ["1", "2", "3", "4"];
+
+  $images = [
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  ];
+
+  $randomImage = $images[array_rand($images)];
+
 ?>
 
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
-    <?php
-    include ('connect.php');
-    $sql = "SELECT * FROM user";
-    $result = mysqli_query($db, $sql);
-    ?>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -73,7 +90,7 @@ $loggedInUsername = getLoggedInUsername();
               <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">Active</a>
             </li>
             <li class="mr-4">
-              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/createpost.php">Post erstellen</a>
+              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Post erstellen</a>
             </li>
           </ul>
           <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) { ?>
@@ -133,16 +150,12 @@ $loggedInUsername = getLoggedInUsername();
       <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <!--Left Col-->
         <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
-          <p class="uppercase tracking-loose w-full">What business are you?</p>
           <h1 class="my-4 text-5xl font-bold leading-tight">
-            Main Hero Message to sell yourself!
-          </h1>
-          <p class="leading-normal text-2xl mb-8">
-            Sub-hero message, not too long and not too short. Make it just right!
-            <button class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-            Subscribe
-          </button>
-        </div>
+            <?php
+                echo "Willkommen, " . $loggedInUsername . "!";
+            ?> 
+            </h1>
+         </div>
         <!--Right Col-->
         <div class="w-full md:w-3/5 py-6 text-center">
           <img class="w-full md:w-4/5 z-50" src="hero.png" />
@@ -563,91 +576,104 @@ $loggedInUsername = getLoggedInUsername();
         </div>
       </div>
     </section>
-    <section class="bg-gray-100 py-8">
+    <section class="bg-white py-8">
       <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
         <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-          Pricing
+          Some of our Member
         </h2>
-        <div class="w-full mb-4">
-          <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+        <ul role="list" class="divide-y divide-gray-100">
+        <?php for($i=0;$i <6; $i++)  { ?>
+  <li class="flex justify-between gap-x-6 py-5">
+    <div class="flex min-w-0 gap-x-4">
+      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="c echo $randomImage; ?>" alt="">
+      <div class="min-w-0 flex-auto">
+        <p class="text-sm font-semibold leading-6 text-gray-900"><?php echo $randomName; ?></p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500"><?php echo $randomEmail; ?></p>
+      </div>
+    </div>
+    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+      <p class="text-sm leading-6 text-gray-900"><?php echo $randomJob; ?></p>
+      <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z"><?php echo $randomTime; ?>h ago</time></p>
+    </div>
+  </li>
+  <?php } ?>
+  <li class="flex justify-between gap-x-6 py-5">
+  <div class="flex min-w-0 gap-x-4">
+      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<?php echo $randomImage; ?>" alt="">
+      <div class="min-w-0 flex-auto">
+        <p class="text-sm font-semibold leading-6 text-gray-900"><?php echo $randomName; ?></p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500"><?php echo $randomEmail; ?></p>
+      </div>
+    </div>
+    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+      <p class="text-sm leading-6 text-gray-900">$randomjob</p>
+      <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time></p>
+    </div>
+  </li>
+  <li class="flex justify-between gap-x-6 py-5">
+  <div class="flex min-w-0 gap-x-4">
+      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<?php echo $randomImage; ?>" alt="">
+      <div class="min-w-0 flex-auto">
+        <p class="text-sm font-semibold leading-6 text-gray-900"><?php echo $randomName; ?></p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500"><?php echo $randomEmail; ?></p>
+      </div>
+    </div>
+    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+      <p class="text-sm leading-6 text-gray-900">Business Relations</p>
+      <div class="mt-1 flex items-center gap-x-1.5">
+        <div class="flex-none rounded-full bg-emerald-500/20 p-1">
+          <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
         </div>
-        <div class="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4">
-          <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
-            <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
-              <div class="p-8 text-3xl font-bold text-center border-b-4">
-                Free
-              </div>
-              <ul class="w-full text-center text-sm">
-                <li class="border-b py-4">Thing</li>
-                <li class="border-b py-4">Thing</li>
-                <li class="border-b py-4">Thing</li>
-              </ul>
-            </div>
-            <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-              <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                £0
-                <span class="text-base">for one user</span>
-              </div>
-              <div class="flex items-center justify-center">
-                <a href="/login.php">
-                <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" href="/login.php">
-                  Sign Up
-                </button>
-              </a>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
-            <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-              <div class="w-full p-8 text-3xl font-bold text-center">Basic</div>
-              <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
-              <ul class="w-full text-center text-base font-bold">
-                <li class="border-b py-4">Thing</li>
-                <li class="border-b py-4">Thing</li>
-                <li class="border-b py-4">Thing</li>
-                <li class="border-b py-4">Thing</li>
-              </ul>
-            </div>
-            <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-              <div class="w-full pt-6 text-4xl font-bold text-center">
-                £x.99
-                <span class="text-base">/ per user</span>
-              </div>
-              <div class="flex items-center justify-center">
-                <a href="/login.php">
-                <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                  Sign Up
-                </button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
-            <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
-              <div class="p-8 text-3xl font-bold text-center border-b-4">
-                Pro
-              </div>
-              <ul class="w-full text-center text-sm">
-                <li class="border-b py-4">Thing</li>
-                <li class="border-b py-4">Thing</li>
-                <li class="border-b py-4">Thing</li>
-              </ul>
-            </div>
-            <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-              <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                £x.99
-                <span class="text-base">/ per user</span>
-              </div>
-              <div class="flex items-center justify-center">
-                <a href="/login.php">
-                <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                  Sign Up
-                </button>
-                </a>
-              </div>
-            </div>
-          </div>
+        <p class="text-xs leading-5 text-gray-500">Online</p>
+      </div>
+    </div>
+  </li>
+  <li class="flex justify-between gap-x-6 py-5">
+  <div class="flex min-w-0 gap-x-4">
+      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<?php echo $randomImage; ?>" alt="">
+      <div class="min-w-0 flex-auto">
+        <p class="text-sm font-semibold leading-6 text-gray-900"><?php echo $randomName; ?></p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500"><?php echo $randomEmail; ?></p>
+      </div>
+    </div>
+    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+      <p class="text-sm leading-6 text-gray-900">Front-end Developer</p>
+      <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time></p>
+    </div>
+  </li>
+  <li class="flex justify-between gap-x-6 py-5">
+  <div class="flex min-w-0 gap-x-4">
+      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<?php echo $randomImage; ?>" alt="">
+      <div class="min-w-0 flex-auto">
+        <p class="text-sm font-semibold leading-6 text-gray-900"><?php echo $randomName; ?></p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500"><?php echo $randomEmail; ?></p>
+      </div>
+    </div>
+    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+      <p class="text-sm leading-6 text-gray-900">Designer</p>
+      <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time></p>
+    </div>
+  </li>
+  <li class="flex justify-between gap-x-6 py-5">
+  <div class="flex min-w-0 gap-x-4">
+      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<?php echo $randomImage; ?>" alt="">
+      <div class="min-w-0 flex-auto">
+        <p class="text-sm font-semibold leading-6 text-gray-900"><?php echo $randomName; ?></p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500"><?php echo $randomEmail; ?></p>
+      </div>
+    </div>
+    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+      <p class="text-sm leading-6 text-gray-900">Director of Product</p>
+      <div class="mt-1 flex items-center gap-x-1.5">
+        <div class="flex-none rounded-full bg-emerald-500/20 p-1">
+          <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
         </div>
+        <p class="text-xs leading-5 text-gray-500">Online</p>
+      </div>
+    </div>
+  </li>
+</ul>
+
       </div>
     </section>
     <!-- Change the colour #f8fafc to match the previous section colour -->
