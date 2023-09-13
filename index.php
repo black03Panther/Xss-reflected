@@ -579,7 +579,8 @@ $loggedInUsername = getLoggedInUsername();
         <ul role="list" class="divide-y divide-gray-100">
         <?php for ($i = 0; $i < 6; $i++) { 
     $randomIndex = array_rand($names);
-    $randomName = $names[$randomIndex];
+    $t1 = "SELECT fullname FROM user Where user_id = $randomIndex";
+    $randomName = $db->query($t1);
     $randomEmail = $emails[$randomIndex];
     $randomJob = $Jobs[array_rand($Jobs)]; 
     $randomTime = $Times[$randomIndex];
@@ -589,7 +590,7 @@ $loggedInUsername = getLoggedInUsername();
     <div class="flex min-w-0 gap-x-4">
     <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<?php echo $randomImage; ?>" alt="">
       <div class="min-w-0 flex-auto">
-        <p class="text-sm font-semibold leading-6 text-gray-900"><?php echo $randomName; ?></p>
+        <p class="text-sm font-semibold leading-6 text-gray-900"><?php row[$randomName]; ?></p>
         <p class="mt-1 truncate text-xs leading-5 text-gray-500"><?php echo $randomEmail; ?></p>
       </div>
     </div>
