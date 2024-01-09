@@ -39,7 +39,7 @@ $loggedInUsername = getLoggedInUsername();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>
-      Tailwind Starter Template - Landing Page Template: Tailwind Toolbox
+      XSS in einer sicheren Umgebung austesten
     </title>
     <meta name="description" content="Simple landind page" />
     <meta name="keywords" content="" />
@@ -582,7 +582,7 @@ $loggedInUsername = getLoggedInUsername();
             $userCount = max($userCount, 6); 
 
             for ($i = 0; $i < 6; $i++) {
-                $t1 = "SELECT fullname, email, job FROM user LIMIT 1 OFFSET $i";
+              $t1 = "SELECT fullname, email, job FROM user ORDER BY RAND() LIMIT 1 OFFSET $i";
                 $result = $db->query($t1);
 
                 if ($result && $result->num_rows > 0) {

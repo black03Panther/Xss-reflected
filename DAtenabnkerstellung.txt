@@ -1,0 +1,41 @@
+Hier wird ausgegangen das man LAragon nutzt und wird erklärt wie die Datenbank erstellt wird.
+
+Als erstes startet man laragon und geht ins TErminal. Dort stellt man eine Verbindung zu Mysql her mit folgendem Befehl
+
+mysql -u root -p
+
+Wenn anschließend nach einem Passwort gefragt wird, obwol man keines vergeben hat einfach enter drücken.
+Anschließend erstellt man die Datenbank mit folgendem Befehl.
+
+CREATE DATABASE stored_1;
+
+Jetzt gibt man über folgenden Befehl ein das man die Datenbank verwendet.
+
+USE stored_1;
+
+Nun wird die Tabelle User mit den entsprechenden Attributen erstellt.
+
+CREATE TABLE user (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    fullname VARCHAR(50),
+    password VARCHAR(500),
+    email VARCHAR(50),
+    job VARCHAR(50)
+);
+
+Anschließend können ein paar vorgefertigte Einträge eingefügt werden.
+INSERT INTO user (username, fullname, password, email, job)
+VALUES 
+    ('hackeri', 'John Doe', 'Hallo', 'hallo@gmx.de', 'Entwickler'),
+    ('weißnix', 'Peter Pan', 'Hallo', 'hsasd@gmx.de', 'Designer'),
+    ('nanix', 'Joe Doen', 'Hallo', 'hghmhmg@gmx.de', 'CEO'),
+    ('tunix', 'Manfred Müller', 'Hallo', 'httfr@gmx.de', 'Webanwendungsentwickler'),
+    ('machnix', 'Oliver Peitsche', 'Hallo', 'hjkh@gmx.de', 'Tech Profi'),
+    ('kannix', 'Tarek Kress', 'Hallo', 'sfdgjn@gmx.de', 'Manager'),
+    ('handi', 'Volker Meyer', 'Hallo', 'hdfr@gmx.de', 'Taktiker'),
+    ('hasi', 'Ulf Meier', 'Hallo', 'fghghf@gmx.de', 'Developer'),
+    ('behs', 'Rene Pilker', 'Hallo', 'hghf@gmx.de', 'Entwickler'),
+    ('lecht', 'Elke Mursch', 'Hallo', 'hasd@gmx.de', 'Sicherheitsbeauftragter');
+
+Nun ist die Datenbank zum Projekt erstellt.
