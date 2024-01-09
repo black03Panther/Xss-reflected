@@ -1,12 +1,13 @@
 <?php
 session_start();
-include ('connect.php');
+include('connect.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $fullname = $_POST["fullname"];
-  $email = $_POST["email"];
-  $username = $_POST["username"];
-  $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $fullname = $_POST["fullname"];
+    $email = $_POST["email"];
+    $username = $_POST["username"];
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $job = $_POST["job"];
 
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Ungültige E-Mail-Adresse.";
@@ -33,11 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (empty($errors)) {
-      $sql = "INSERT INTO user (fullname, email, username, password) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO user (fullname, email, username, password, job) VALUES (?, ?, ?, ?, ?)";
       $stmt = $db->prepare($sql);
 
       if ($stmt) {
-          $stmt->bind_param("ssss", $fullname, $email, $username, $password);
+        $stmt->bind_param("sssss", $fullname, $email, $username, $password, $job);
           if ($stmt->execute()) {
               $stmt->close();
               $db->close();
@@ -86,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <nav id="header" class="fixed w-full z-30 top-0 text-white">
       <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
         <div class="pl-4 flex items-center">
-          <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" >
+          <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="/" >
             <!--Icon from: http://www.potlabicons.com/ -->
             <svg class="h-8 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.005 512.005">
               <rect fill="#2a2a31" x="16.539" y="425.626" width="479.767" height="50.502" transform="matrix(1,0,0,1,0,0)" />
@@ -112,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">Active</a>
             </li>
             <li class="mr-4">
-              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Post erstellen</a>
+              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/createpost.php">Post erstellen</a>
             </li>
           </ul>
           <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) { ?>
@@ -193,6 +194,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         class="block border border-grey-light w-full p-3 rounded mb-4"
                         name="username"
                         placeholder="Username" />
+                      <input 
+                        type="Job"
+                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        name="job"
+                        placeholder="Enter your job" />
 
                     <input 
                         type="password"

@@ -59,7 +59,7 @@ $loggedInUsername = getLoggedInUsername();
     <nav id="header" class="fixed w-full z-30 top-0 text-white">
       <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
         <div class="pl-4 flex items-center">
-          <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" >
+          <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"  >
             <!--Icon from: http://www.potlabicons.com/ -->
             <svg class="h-8 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.005 512.005">
               <rect fill="#2a2a31" x="16.539" y="425.626" width="479.767" height="50.502" transform="matrix(1,0,0,1,0,0)" />
@@ -85,7 +85,7 @@ $loggedInUsername = getLoggedInUsername();
               <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">Active</a>
             </li>
             <li class="mr-4">
-              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Post erstellen</a>
+              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/createpost.php">Post erstellen</a>
             </li>
           </ul>
           <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) { ?>
@@ -572,39 +572,53 @@ $loggedInUsername = getLoggedInUsername();
       </div>
     </section>
     <section class="bg-white py-8">
-      <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
+    <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
         <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-          Some of our Member
+            Some of our Member
         </h2>
         <ul role="list" class="divide-y divide-gray-100">
-        <?php for ($i = 0; $i < 6; $i++) { 
-    $randomIndex = array_rand($names);
-    $t1 = "SELECT fullname FROM user Where user_id = $randomIndex";
-    $randomName = $db->query($t1);
-    $randomEmail = $emails[$randomIndex];
-    $randomJob = $Jobs[array_rand($Jobs)]; 
-    $randomTime = $Times[$randomIndex];
-    $randomImage = $images[array_rand($images)]; 
-?>
-  <li class="flex justify-between gap-x-6 py-5">
-    <div class="flex min-w-0 gap-x-4">
-    <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<?php echo $randomImage; ?>" alt="">
-      <div class="min-w-0 flex-auto">
-        <p class="text-sm font-semibold leading-6 text-gray-900"><?php row[$randomName]; ?></p>
-        <p class="mt-1 truncate text-xs leading-5 text-gray-500"><?php echo $randomEmail; ?></p>
-      </div>
-    </div>
-    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-      <p class="text-sm leading-6 text-gray-900"><?php echo $randomJob; ?></p>
-      <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z"><?php echo $randomTime; ?>h ago</time></p>
-    </div>
-  </li>
-  <?php } ?>
-  
-</ul>
+            <?php
+            $userCount = $db->query("SELECT COUNT(*) as count FROM user")->fetch_assoc()['count'];
+            $userCount = max($userCount, 6); 
 
-      </div>
-    </section>
+            for ($i = 0; $i < 6; $i++) {
+                $t1 = "SELECT fullname, email, job FROM user LIMIT 1 OFFSET $i";
+                $result = $db->query($t1);
+
+                if ($result && $result->num_rows > 0) {
+                    $userData = $result->fetch_assoc();
+                    if (isset($userData['fullname'], $userData['email'], $userData['job'])) {
+                        $name = $userData['fullname'];
+                        $email = $userData['email'];
+                        $job = $userData['job'];
+                        $randomImage = $images[array_rand($images)]; 
+            ?>
+                        <li class="flex justify-between gap-x-6 py-5">
+                            <div class="flex min-w-0 gap-x-4">
+                                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<?php echo $randomImage; ?>" alt="">
+                                <div class="min-w-0 flex-auto">
+                                    <p class="text-sm font-semibold leading-6 text-gray-900"><?php echo $name; ?></p>
+                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500"><?php echo $email; ?></p>
+                                </div>
+                            </div>
+                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                <p class="text-sm leading-6 text-gray-900"><?php echo $job; ?></p>
+                            </div>
+                        </li>
+            <?php
+                    }
+                }
+            }
+            ?>
+        </ul>
+
+
+
+
+
+    </div>
+</section>
+
     <!-- Change the colour #f8fafc to match the previous section colour -->
     <svg class="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
