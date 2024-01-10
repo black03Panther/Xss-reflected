@@ -4,21 +4,13 @@ include ('connect.php');
 
 function getLoggedInUsername() {
     if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-        return $_SESSION["fullname"];
+        return $_SESSION["username"];
     } else {
         return "Gast"; 
     }
 }
 
 $loggedInUsername = getLoggedInUsername();
-
-
-  $names = ["Leslie Alexander", "John Doe", "Jane Smith", "Michael Johnson"];
-  $emails = ["leslie.alexander@example.com", "john.doe@example.com", "jane.smith@example.com", "michael.johnson@example.com"];
-  $Jobs = ["Front-end Developer", "Back-end Developer", "UI/UX Designer", "Product Manager", "Data Analyst"];
-  $Times = ["1", "2", "3", "4", "5"];
-
-
 
   $images = [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",

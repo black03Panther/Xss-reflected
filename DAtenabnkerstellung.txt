@@ -25,6 +25,7 @@ CREATE TABLE user (
 );
 
 Anschließend können ein paar vorgefertigte Einträge eingefügt werden.
+
 INSERT INTO user (username, fullname, password, email, job)
 VALUES 
     ('hackeri', 'John Doe', 'Hallo', 'hallo@gmx.de', 'Entwickler'),
