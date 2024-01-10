@@ -37,6 +37,6 @@ VALUES
     ('handi', 'Volker Meyer', 'Hallo', 'hdfr@gmx.de', 'Taktiker'),
     ('hasi', 'Ulf Meier', 'Hallo', 'fghghf@gmx.de', 'Developer'),
     ('behs', 'Rene Pilker', 'Hallo', 'hghf@gmx.de', 'Entwickler'),
-    ('lecht', 'Elke Mursch', 'Hallo', 'hasd@gmx.de', 'Sicherheitsbeauftragter');
+    ('lecht', 'Elke Mertens', 'Hallo', 'hasd@gmx.de', 'Sicherheitsbeauftragter');
 
 Nun ist die Datenbank zum Projekt erstellt.
