@@ -12,14 +12,6 @@ function getLoggedInUsername() {
 
 $loggedInUsername = getLoggedInUsername();
 
-
-  $names = ["Leslie Alexander", "John Doe", "Jane Smith", "Michael Johnson"];
-  $emails = ["leslie.alexander@example.com", "john.doe@example.com", "jane.smith@example.com", "michael.johnson@example.com"];
-  $Jobs = ["Front-end Developer", "Back-end Developer", "UI/UX Designer", "Product Manager", "Data Analyst"];
-  $Times = ["1", "2", "3", "4", "5"];
-
-
-
   $images = [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
       "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
@@ -45,9 +37,7 @@ $loggedInUsername = getLoggedInUsername();
     <meta name="keywords" content="" />
     <meta name="author" content="" />
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
-    <!--Replace with your tailwind.css once created-->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" />
-    <!-- Define your gradient here - use online tools to find a gradient matching your branding-->
     <style>
       .gradient {
         background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
@@ -140,7 +130,6 @@ $loggedInUsername = getLoggedInUsername();
       </div>
       <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
     </nav>
-    <!--Hero-->
     <div class="pt-25">
       <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <!--Left Col-->
@@ -619,7 +608,6 @@ $loggedInUsername = getLoggedInUsername();
     </div>
 </section>
 
-    <!-- Change the colour #f8fafc to match the previous section colour -->
     <svg class="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g transform="translate(-1.000000, -14.000000)" fill-rule="nonzero">
@@ -655,13 +643,13 @@ $loggedInUsername = getLoggedInUsername();
         Action!
       </button>
     </section>
+
     <!--Footer-->
     <footer class="bg-white">
       <div class="container mx-auto px-8">
         <div class="w-full flex flex-col md:flex-row py-6">
           <div class="flex-1 mb-6 text-black">
             <a class="text-pink-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
-              <!--Icon from: http://www.potlabicons.com/ -->
               <svg class="h-8 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.005 512.005">
                 <rect fill="#2a2a31" x="16.539" y="425.626" width="479.767" height="50.502" transform="matrix(1,0,0,1,0,0)" />
                 <path
@@ -728,9 +716,7 @@ $loggedInUsername = getLoggedInUsername();
         </div>
       </div>
     </footer>
-    <!-- jQuery if you need it
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  -->
+
     <script>
       var scrollpos = window.scrollY;
       var header = document.getElementById("header");
@@ -740,7 +726,6 @@ $loggedInUsername = getLoggedInUsername();
       var toToggle = document.querySelectorAll(".toggleColour");
 
       document.addEventListener("scroll", function () {
-        /*Apply classes for slide in bar*/
         scrollpos = window.scrollY;
 
         if (scrollpos > 10) {
@@ -749,7 +734,6 @@ $loggedInUsername = getLoggedInUsername();
           navaction.classList.add("gradient");
           navaction.classList.remove("text-gray-800");
           navaction.classList.add("text-white");
-          //Use to switch toggleColour colours
           for (var i = 0; i < toToggle.length; i++) {
             toToggle[i].classList.add("text-gray-800");
             toToggle[i].classList.remove("text-white");
@@ -763,7 +747,6 @@ $loggedInUsername = getLoggedInUsername();
           navaction.classList.add("bg-white");
           navaction.classList.remove("text-white");
           navaction.classList.add("text-gray-800");
-          //Use to switch toggleColour colours
           for (var i = 0; i < toToggle.length; i++) {
             toToggle[i].classList.add("text-white");
             toToggle[i].classList.remove("text-gray-800");
@@ -776,8 +759,6 @@ $loggedInUsername = getLoggedInUsername();
       });
     </script>
     <script>
-      /*Toggle dropdown list*/
-      /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
 
       var navMenuDiv = document.getElementById("nav-content");
       var navMenu = document.getElementById("nav-toggle");
@@ -788,16 +769,13 @@ $loggedInUsername = getLoggedInUsername();
 
         //Nav Menu
         if (!checkParent(target, navMenuDiv)) {
-          // click NOT on the menu
           if (checkParent(target, navMenu)) {
-            // click on the link
             if (navMenuDiv.classList.contains("hidden")) {
               navMenuDiv.classList.remove("hidden");
             } else {
               navMenuDiv.classList.add("hidden");
             }
           } else {
-            // click both outside link and outside menu, hide menu
             navMenuDiv.classList.add("hidden");
           }
         }

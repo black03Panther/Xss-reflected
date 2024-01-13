@@ -1,21 +1,17 @@
 <?php
 session_start();
     include ('connect.php');
-        //<!-- Die Daten mit den Daten aus der Datenbank abgleichen -->
    if ($_SERVER["REQUEST_METHOD"] == "POST") {
       
        $email = $_POST["email"];
        $password = $_POST["password"];
-   
-       // Hier sollte eine sicherere Methode zur Passwort-Überprüfung verwendet werden (z.B. Hashing und Vergleich)
-   
+
        $sql = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
        $result = $db->query($sql);
    
        if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
 
-            // Anmeldung erfolgreich
             $_SESSION["loggedin"] = true;
             $_SESSION["email"] = $email;
             $_SESSION["username"] = $row['username'];
