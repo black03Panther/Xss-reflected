@@ -4,7 +4,7 @@ include ('connect.php');
 
 function getLoggedInUsername() {
     if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-        return $_SESSION["fullname"];
+        return $_SESSION["username"];
     } else {
         return "Gast"; 
     }
